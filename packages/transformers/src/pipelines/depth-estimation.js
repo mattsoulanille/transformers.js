@@ -83,8 +83,8 @@ export class DepthEstimationPipeline
                 .div_(maxval - minval)
                 .mul_(255)
                 .to('uint8')
-                .unsqueeze(0);
-            const depth = RawImage.fromTensor(formatted);
+                .unsqueeze(-1);
+            const depth = RawImage.fromTensor(formatted, 'HWC');
             toReturn.push({
                 predicted_depth: prediction,
                 depth,
